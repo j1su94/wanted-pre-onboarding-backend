@@ -1,7 +1,6 @@
 package kr.co.wanted.recruit.controller;
 
 import jakarta.validation.Valid;
-import kr.co.wanted.Apply.dto.ApplyCreate;
 import kr.co.wanted.recruit.dto.RecruitCreate;
 import kr.co.wanted.recruit.dto.RecruitResponse;
 import kr.co.wanted.recruit.dto.RecruitUpdate;
