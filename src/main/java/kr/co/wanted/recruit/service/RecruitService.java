@@ -12,9 +12,10 @@ public interface RecruitService {
 	
 	Long updateRecruit(long id, RecruitUpdate recruitUpdate);
 	
+	Long removeRecruit(long id);
+	
 	List<RecruitResponse> selectAllRecruitByKeword(String keyword);
 	
 	RecruitResponse selectRecruitDetail(long id);
 	
-	Long removeRecruit(long id);
 }

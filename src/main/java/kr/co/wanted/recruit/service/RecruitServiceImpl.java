@@ -1,6 +1,7 @@
 package kr.co.wanted.recruit.service;
 
 import jakarta.transaction.Transactional;
+import kr.co.wanted.Apply.dto.ApplyCreate;
 import kr.co.wanted.recruit.dto.RecruitCreate;
 import kr.co.wanted.recruit.dto.RecruitResponse;
 import kr.co.wanted.recruit.dto.RecruitUpdate;
@@ -24,6 +25,22 @@ public class RecruitServiceImpl implements RecruitService {
 	}
 	
 	@Override
+	@Transactional
+	public Long updateRecruit(long id, RecruitUpdate recruitUpdate) {
+		Recruit recruit = recruitRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 채용공고가 없습니다. id = " + id));
+		recruit.update(recruitUpdate.getPosition(), recruitUpdate.getReward(), recruitUpdate.getDetail(), recruitUpdate.getTechnologies());
+		
+		return id;
+	}
+	
+	@Override
+	public Long removeRecruit(long id) {
+		recruitRepo.deleteById(id);
+		
+		return id;
+	}
+	
+	@Override
 	public List<RecruitResponse> selectAllRecruitByKeword(String keyword) {
 		return recruitRepo.findAllRecruitByKeword(keyword);
 	}
@@ -38,22 +55,6 @@ public class RecruitServiceImpl implements RecruitService {
 		result.setOtherRecruitList(otherRecruitList);
 		
 		return result;
-	}
-	
-	@Override
-	@Transactional
-	public Long updateRecruit(long id, RecruitUpdate recruitUpdate) {
-		Recruit recruit = recruitRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 채용공고가 없습니다. id = " + id));
-		recruit.update(recruitUpdate.getPosition(), recruitUpdate.getReward(), recruitUpdate.getDetail(), recruitUpdate.getTechnologies());
-		
-		return id;
-	}
-	
-	@Override
-	public Long removeRecruit(long id) {
-		recruitRepo.deleteById(id);
-		
-		return id;
 	}
 	
 }
